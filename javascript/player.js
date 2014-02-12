@@ -1,19 +1,14 @@
 // Create a namespace so that we're not polluting window
 var TBPlayer = window.TBPlayer || {};
 
-// Shim hasOwnProperty because I like overkill
-TBPlayer.hop = function (obj, prop) {
-  if (typeof obj == 'undefined' || typeof prop == 'undefined' || typeof obj[prop] == 'undefined') {
-    return false;
-  } else {
-    return obj[prop] !== obj.constructor.prototype[prop];
-  }
-};
-
 // Verify and process the configuration
 TBPlayer.players = $.map( $.makeArray(TBPlayer.players), function ( player, i ) {
-  if (TBPlayer.hop(player, 'id') && TBPlayer.hop(player, 'language') && TBPlayer.hop(player, 'book') && TBPlayer.hop(player, 'chapter')) {
-    return { id: player.id, reqUrl: '/data/' + player.language + '/' + player.book + '.json', chapter: player.chapter - 1 };
+  if ( player.hasOwnProperty('id') && player.hasOwnProperty('language') && player.hasOwnProperty('book') && player.hasOwnProperty('chapter') ) {
+    return {
+      id: player.id,
+      reqUrl: '/data/' + player.language + '/' + player.book + '.json',
+      chapter: player.chapter - 1
+    };
   } else {
     return null;
   }
@@ -33,7 +28,7 @@ TBPlayer.failNicely = function( id ) {
 };
 
 // Do the heavy lifting
-TBPlayer.makeNoise = function () {
+TBPlayer.createAll = function () {
   var t = TBPlayer,
       players = t.players || [];
 
@@ -71,5 +66,5 @@ TBPlayer.makeNoise = function () {
 
 $(function () {
   TBPlayer.audioJs = audiojs.createAll();
-  TBPlayer.makeNoise();
+  TBPlayer.createAll();
 });
