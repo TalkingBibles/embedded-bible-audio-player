@@ -29,11 +29,10 @@ TBPlayer.failNicely = function( id ) {
 
 // Do the heavy lifting
 TBPlayer.createAll = function () {
-  var t = TBPlayer,
-      players = t.players || [];
+  var t = TBPlayer;
 
   // Iterate through chapter array creating audio players for each
-  $.each(players, function( i, player ) {
+  $.each(t.players, function( i, player ) {
 
     // Fetch the chapter information and create an audio file
     $.ajax({
