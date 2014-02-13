@@ -1,69 +1,90 @@
-// Create a namespace so that we're not polluting window
-var TBPlayer = window.TBPlayer || {};
+/*global $, window*/
+(function (window) {
+  "use strict";
 
-// Verify and process the configuration
-TBPlayer.players = $.map( $.makeArray(TBPlayer.players), function ( player, i ) {
-  if ( player.hasOwnProperty('id') && player.hasOwnProperty('language') && player.hasOwnProperty('book') && player.hasOwnProperty('chapter') ) {
-    return {
-      id: player.id,
-      reqUrl: '/data/' + player.language + '/' + player.book + '.json',
-      chapter: player.chapter - 1
-    };
-  } else {
-    return null;
-  }
-});
+  // Create a namespace so that we're not polluting window
+  var TBPlayer = window.TBPlayer || {};
 
-// Expected API return
-TBPlayer.defaultData = {
-  book: {
-    chapters: []
-  }
-};
+  // Set configuration variables with defaults
+  TBPlayer.config = $.extend({}, {
+    requestTarget: "http://talkingbibles.net/api/v1"
+  }, TBPlayer.config || {});
 
-TBPlayer.failNicely = function( id ) {
-  $(id).replaceWith(
-    $('<p class="audio-player-failure">The requested chapter did not load.</p>')
-  );
-};
-
-// Do the heavy lifting
-TBPlayer.createAll = function () {
-  var t = TBPlayer;
-
-  // Iterate through chapter array creating audio players for each
-  $.each(t.players, function( i, player ) {
-
-    // Fetch the chapter information and create an audio file
-    $.ajax({
-      url: player.reqUrl,
-      beforeSend: function( xhr ) {
-        xhr.overrideMimeType( 'application/json; charset=utf-8' );
-      }
-    })
-      .done( function( data ) {
-        var safeData = $.extend({}, t.defaultData, data || {});
-        if (safeData.book.chapters.length > player.chapter) {
-          $(player.id).replaceWith(
-            $('<audio></audio>').attr({
-              class: 'audio-player',
-              controls: 'controls',
-              preload: 'metadata',
-              src: safeData.book.chapters[player.chapter].href
-            })
-          );
-        } else {
-          t.failNicely( player.id );
-        }
-      })
-      .fail( function() {
-        t.failNicely( player.id );
-      });
+  // Verify and process the configuration
+  TBPlayer.players = $.map($.makeArray(TBPlayer.players), function (player) {
+    if ("id" in player && "language" in player && "book" in player && "chapter" in player) {
+      return {
+        id: player.id,
+        reqUrl: TBPlayer.config.requestTarget + "/" + player.language + "/" + player.book + ".json",
+        chapter: player.chapter - 1
+      };
+    } else {
+      return null;
+    }
   });
 
-};
+  // Expected API return format
+  TBPlayer.expectedResponse = {
+    status: "",
+    data: {
+      language: {},
+      book: {
+        chapters: []
+      }
+    }
+  };
 
-$(function () {
-  TBPlayer.audioJs = audiojs.createAll();
-  TBPlayer.createAll();
-});
+  TBPlayer.failNicely = function (id) {
+    $(id).append(
+      $("<p class=\"tbplayer-failure\">The requested chapter was not found.</p>")
+    );
+  };
+
+  // Do the heavy lifting
+  TBPlayer.createAll = function () {
+    var t = TBPlayer;
+
+    // Iterate through chapter array creating audio players for each
+    $.each(t.players, function (i, player) {
+
+      // Create a player wrapper in place of each script tag
+      $(player.id).each(function () {
+        $(this).replaceWith("<div id=\"" + $(this).attr("id") + "\" class=\"tbplayer\"></div>");
+      });
+
+      // Fetch the chapter information and create an audio file
+      $.ajax({
+        url: player.reqUrl,
+        context: player,
+        dataType: "json"
+      })
+        .done(function (unsafeResponse) {
+          // Make the response fit the expected format
+          var response = $.extend({}, t.expectedResponse, unsafeResponse || {});
+
+          // Check for successful response and check to make sure the chapter exists
+          if (response.status === "success" && response.data.book.chapters.length > this.chapter) {
+
+            // Append a player to the player wrapper created above
+            $(this.id).append(
+              $("<audio></audio>").attr({
+                "class": "tbplayer-controls",
+                "controls": "controls",
+                "preload": "metadata",
+                src: response.data.book.chapters[this.chapter].href
+              })
+            );
+          } else {
+            t.failNicely(this.id);
+          }
+        })
+        .fail(function () {
+          t.failNicely(player.id);
+        });
+    });
+
+  };
+
+  // Create the players once the document is ready
+  $(TBPlayer.createAll());
+})(window);
