@@ -27,14 +27,14 @@
       );
     } else {
       $(this).append(
-        $("<span class=\"tbplayer-error\">The requested chapter did not load.</span>")
+        $("<span class=\"tbplayer-error\">The requested chapter was not found.</span>")
       );
     }
   };
 
   TBPlayer.failGracefully = function() {
     $(this).append(
-      $("<span class=\"tbplayer-error\">The requested chapter did not load.</span>")
+      $("<span class=\"tbplayer-error\">The requested chapter was not found.</span>")
     );
   };
 
