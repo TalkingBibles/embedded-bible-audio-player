@@ -1,5 +1,5 @@
-/*global $, window*/
-(function (window) {
+/*global jQuery, window*/
+(function (window, $) {
   "use strict";
 
   // Create a namespace so that we're not polluting window
@@ -8,24 +8,6 @@
   // Set configuration variables with defaults
   TBPlayer.config = {
     requestTarget: "http://talkingbibles.net/api/v1"
-  };
-
-  // Expected API return format
-  TBPlayer.expectedResponse = {
-    status: "",
-    data: {
-      language: {},
-      book: {
-        chapters: []
-      }
-    }
-  };
-
-  // Just fail gracefully, dang it!
-  TBPlayer.failNicely = function (id) {
-    $(id).append(
-      $("<p class=\"tbplayer-failure\">The requested chapter was not found.</p>")
-    );
   };
 
   // Do the heavy lifting
@@ -43,28 +25,31 @@
         url: reqUrl,
         dataType: "json"
       })
-      .done(function (unsafeResponse) {
-        // Make the response fit the expected format
-        var response = $.extend({}, t.expectedResponse, unsafeResponse || {});
+      .done(function (response) {
+        try {
+          // Check for successful response and check to make sure the chapter exists
+          if (response.status === "success" && response.data.book.chapters.length > chapter) {
 
-        // Check for successful response and check to make sure the chapter exists
-        if (response.status === "success" && response.data.book.chapters.length > chapter) {
-
-          // Append a player to the player wrapper created above
+            // Append a player to the player wrapper created above
+            $(player).append(
+              $("<audio></audio>").attr({
+                "class": "tbplayer-controls",
+                "controls": "controls",
+                "preload": "metadata",
+                src: response.data.book.chapters[chapter].href
+              })
+            );
+          }
+        } catch (e) {
           $(player).append(
-            $("<audio></audio>").attr({
-              "class": "tbplayer-controls",
-              "controls": "controls",
-              "preload": "metadata",
-              src: response.data.book.chapters[chapter].href
-            })
+            $("<p class=\"tbplayer-failure\">The requested chapter cannot be played.</p>")
           );
-        } else {
-          t.failNicely(player);
         }
       })
       .fail(function () {
-        t.failNicely(player);
+        $(player).append(
+          $("<p class=\"tbplayer-failure\">The requested chapter did not load.</p>")
+        );
       });
     });
 
@@ -72,4 +57,4 @@
 
   // Create the players once the document is ready
   $(TBPlayer.createAll());
-})(window);
+})(window, jQuery);
