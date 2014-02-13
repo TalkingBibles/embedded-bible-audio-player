@@ -11,12 +11,31 @@
     showFailures: true
   };
 
-  TBPlayer.failNicely = function (parentElement, failureMessage) {
-    if (TBPlayer.config.showFailures) {
-      $(parentElement).append(
-        $("<p class=\"tbplayer-failure\">" + failureMessage + "</p>")
+  TBPlayer.createPlayer = function (data) {
+    var chapterNumber = $(this).data("chapter");
+    // Check whether the chapter exists and has a private url
+    if (typeof data.chapters === "object" &&
+        typeof data.chapters[chapterNumber] === "object" &&
+        typeof data.chapters[chapterNumber].href === "string") {
+      $(this).append(
+        $("<audio></audio>").attr({
+          "class": "tbplayer-controls",
+          "controls": "controls",
+          "preload": "metadata",
+          src: data.chapters[chapterNumber].href
+        })
+      );
+    } else {
+      $(this).append(
+        $("<span class=\"tbplayer-error\">The requested chapter did not load.</span>")
       );
     }
+  };
+
+  TBPlayer.failGracefully = function() {
+    $(this).append(
+      $("<span class=\"tbplayer-error\">The requested chapter did not load.</span>")
+    );
   };
 
   // Do the heavy lifting
@@ -25,41 +44,12 @@
 
     // Iterate through chapter array creating audio players for each
     $(".tbplayer").each(function (i, player) {
-      var bookPath = $(player).data("book"),
-          chapterNumber = ($(player).data("chapter") || 1),
-          requestUrl;
+      var languageBook = $(player).data("book"),
+          requestUrl = TBPlayer.config.requestTarget + languageBook  + ".json";
 
-      // Skip this one if the data attributes are not defined
-      if (typeof chapterNumber === "undefined") { return; }
-      else { requestUrl = t.config.requestTarget + bookPath  + ".json"; }
-
-      // Fetch the chapter information and create an audio file
-      $.ajax({
-        url: requestUrl,
-        dataType: "json"
-      })
-      .done(function (response) {
-        // Check whether the array is long enough to contain the chapter
-        if (chapterNumber in (((response.data || {}).chapters || []))) {
-          //Check whether the chapter has a link
-          if ("href" in response.data.chapters[chapterNumber]) {
-            // Append a player to the player wrapper created above
-            $(player).append(
-              $("<audio></audio>").attr({
-                "class": "tbplayer-controls",
-                "controls": "controls",
-                "preload": "metadata",
-                src: response.data.chapters[chapterNumber].href
-              })
-            );
-          }
-        } else {
-          TBPlayer.failNicely(player, "The requested chapter was not found.");
-        }
-      })
-      .fail(function () {
-        TBPlayer.failNicely(player, "The requested chapter was not loaded.");
-      });
+      $.ajax({url: requestUrl, context: player, dataType: "json"})
+        .done(t.createPlayer)
+        .fail(t.failGracefully);
     });
 
   };
