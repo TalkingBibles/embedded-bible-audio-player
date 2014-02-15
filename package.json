@@ -1,5 +1,5 @@
 {
-  "name": "tbaudiowidget",
+  "name": "tbplayer.jquery",
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "latest",
