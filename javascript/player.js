@@ -1,59 +1,108 @@
-/*global jQuery, window*/
-(function (window, $) {
+(function (window) {
   "use strict";
+
+  var domReady = function () {
+
+    var fns = [], listener
+    , doc = document
+    , domContentLoaded = 'DOMContentLoaded'
+    , loaded = /^loaded|^i|^c/.test(doc.readyState)
+
+    if (!loaded)
+      doc.addEventListener(domContentLoaded, listener = function () {
+        doc.removeEventListener(domContentLoaded, listener)
+        loaded = 1
+        while (listener = fns.shift()) listener()
+      })
+
+    return function (fn) {
+      loaded ? fn() : fns.push(fn)
+    }
+
+  };
 
   // Create a namespace so that we're not polluting window
   var TBPlayer = window.TBPlayer || {};
 
   // Set configuration variables
   TBPlayer.config = {
-    requestTarget: "http://talkingbibles.net/api/v1/",
+    requestTarget: 'http://listen.talkingbibles.org/api/v1',
     showFailures: true
   };
 
-  TBPlayer.createPlayer = function (data) {
-    var chapterNumber = $(this).data("chapter");
-    // Check whether the chapter exists and has a private url
-    if (typeof data.chapters === "object" &&
-        typeof data.chapters[chapterNumber] === "object" &&
-        typeof data.chapters[chapterNumber].href === "string") {
-      $(this).append(
-        $("<audio></audio>").attr({
-          "class": "tbplayer-controls",
-          "controls": "controls",
-          "preload": "metadata",
-          src: data.chapters[chapterNumber].href
-        })
-      );
-    } else {
-      $(this).append(
-        $("<span class=\"tbplayer-error\">The requested chapter was not found.</span>")
-      );
+  TBPlayer.createPlayer = function (holder, location, data) {
+    var cIndex = Number(location[2]);
+
+    if (!data.chapters || !data.chapters[cIndex] || !data.chapters[cIndex].href) {
+        console.log('data error');
+        console.log(holder);
+        TBPlayer.failGracefully(holder, 'The requested chapter could not be found.');
     }
+
+    var audioElement = document.createElement('audio');
+
+    if (audioElement.classList)
+      audioElement.classList.add('tbplayer-controls');
+    else
+      audioElement.className += ' ' + 'tbplayer-controls';
+
+    audioElement.setAttribute('controls', 'controls');
+    audioElement.setAttribute('preload', 'metadata');
+    audioElement.setAttribute('src', data.chapters[cIndex].href);
+
+    holder.appendChild(audioElement);
   };
 
-  TBPlayer.failGracefully = function() {
-    $(this).append(
-      $("<span class=\"tbplayer-error\">The requested chapter was not found.</span>")
-    );
+  TBPlayer.failGracefully = function(holder, message) {
+    var errorElement = document.createElement('span');
+
+    if (errorElement.classList)
+      errorElement.classList.add('tbplayer-error');
+    else
+      errorElement.className += ' ' + 'tbplayer-error';
+
+    errorElement.textContent = message;
+    holder.appendChild(errorElement);
   };
 
   // Do the heavy lifting
   TBPlayer.createAll = function () {
-    var t = TBPlayer;
-
     // Iterate through chapter array creating audio players for each
-    $(".tbplayer").each(function (i, player) {
-      var languageBook = $(player).data("book"),
-          requestUrl = TBPlayer.config.requestTarget + languageBook  + ".json";
+    var holders = document.querySelectorAll('.tbplayer');
 
-      $.ajax({url: requestUrl, context: player, dataType: "json"})
-        .done(t.createPlayer)
-        .fail(t.failGracefully);
+    Array.prototype.forEach.call(holders, function (holder, i) {
+      var holder = holders[i];
+      var location = holder.getAttribute('data-location').split(':');
+
+      if (!(location instanceof Array) || !location[1] || !location[2]) {
+          TBPlayer.failGracefully(holder, 'The audio player is not configured correctly.');
+          return;
+      }
+
+      var requestURL = TBPlayer.config.requestTarget + '/languages/' + location[0] + '/books/' + location[1] + '.json';
+      
+      var request = new XMLHttpRequest();
+      request.open('GET', requestURL, true);
+
+      request.onload = function() {
+        if (request.status >= 200 && request.status < 400){
+          // Success!
+          TBPlayer.createPlayer(holder, location, JSON.parse(request.responseText));
+        } else {
+          // We reached our target server, but it returned an error
+          TBPlayer.failGracefully(holder, 'The requested language could not be found.');
+        }
+      };
+
+      request.onerror = function() {
+        // There was a connection error of some sort
+        TBPlayer.failGracefully(holder, 'The language server is not responding.');
+      };
+
+      request.send();
     });
-
-  };
+};
 
   // Create the players once the document is ready
-  $(TBPlayer.createAll());
-})(window, jQuery);
+  domReady(TBPlayer.createAll());
+})(window);
