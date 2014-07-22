@@ -1,14 +1,12 @@
-(function (window) {
+(function () {
   "use strict";
 
   // Set configuration variables
   var config = {
-    requestTarget: 'http://listen.talkingbibles.org/api/v1',
-    showFailures: true
+    requestTarget: 'http://listen.talkingbibles.org/api/v1'
   };
 
   var domReady = function () {
-
     var fns = [], listener
     , doc = document
     , domContentLoaded = 'DOMContentLoaded'
@@ -24,45 +22,66 @@
     return function (fn) {
       loaded ? fn() : fns.push(fn)
     }
+  };
 
+  var addClass = function (el, klass) {
+    if (el.classList)
+      el.classList.add(klass);
+    else
+      el.className += ' ' + klass;
   };
 
   var createPlayer = function (holder, location, data) {
     var cIndex = Number(location[2]);
 
-    if (!data.chapters || !data.chapters[cIndex] || !data.chapters[cIndex].href) {
-        failGracefully(holder, 'The requested chapter could not be found.');
+    if (!data.title || !(data.chapters instanceof Array)) {
+      return failGracefully(holder, 'The requested book could not be found.');
     }
 
+    if (!data.chapters[cIndex] || !data.chapters[cIndex].href || !data.chapters[cIndex].title) {
+        return failGracefully(holder, 'The requested chapter could not be found.');
+    }
+
+    // Audio information
+    var bookElement = document.createElement('span');
+    bookElement.setAttribute('class', 'tbplayer-info__book');
+    bookElement.textContent = data.title;
+
+    var dividerElement = document.createElement('span');
+    dividerElement.setAttribute('class', 'tbplayer-info__divider');
+    dividerElement.textContent = ' - ';
+
+    var chapterElement = document.createElement('span');
+    chapterElement.setAttribute('class', 'tbplayer-info__chapter');
+    chapterElement.textContent = data.chapters[cIndex].title;
+
+    var infoElement = document.createElement('p');
+    infoElement.setAttribute('class', 'tbplayer-info');
+
+    infoElement.appendChild(bookElement);
+    infoElement.appendChild(dividerElement);
+    infoElement.appendChild(chapterElement);
+
+    // Audio player
     var audioElement = document.createElement('audio');
-
-    if (audioElement.classList)
-      audioElement.classList.add('tbplayer-controls');
-    else
-      audioElement.className += ' ' + 'tbplayer-controls';
-
+    audioElement.setAttribute('class', 'tbplayer-controls');
     audioElement.setAttribute('controls', 'controls');
     audioElement.setAttribute('preload', 'metadata');
     audioElement.setAttribute('src', data.chapters[cIndex].href);
 
+    holder.appendChild(infoElement);
     holder.appendChild(audioElement);
+
+    addClass(holder, 'tbplayer-success');
   };
 
   var failGracefully = function(holder, message) {
-    var errorElement = document.createElement('span');
+    holder.setAttribute('data-error', message);
 
-    if (errorElement.classList)
-      errorElement.classList.add('tbplayer-error');
-    else
-      errorElement.className += ' ' + 'tbplayer-error';
-
-    errorElement.textContent = message;
-    holder.appendChild(errorElement);
+    addClass(holder, 'tbplayer-error');
   };
 
-  // Do the heavy lifting
   var createAll = function () {
-    // Iterate through chapter array creating audio players for each
     var holders = document.querySelectorAll('.tbplayer');
 
     Array.prototype.forEach.call(holders, function (holder, i) {
@@ -70,8 +89,7 @@
       var location = holder.getAttribute('data-location').split(':');
 
       if (!(location instanceof Array) || !location[1] || !location[2]) {
-          failGracefully(holder, 'The audio player is not configured correctly.');
-          return;
+          return failGracefully(holder, 'The audio player is not configured.');
       }
 
       var requestURL = config.requestTarget + '/languages/' + location[0] + '/books/' + location[1] + '.json';
@@ -85,19 +103,19 @@
           createPlayer(holder, location, JSON.parse(request.responseText));
         } else {
           // We reached our target server, but it returned an error
-          failGracefully(holder, 'The requested language could not be found.');
+          return failGracefully(holder, 'The requested language could not be found.');
         }
       };
 
       request.onerror = function() {
         // There was a connection error of some sort
-        failGracefully(holder, 'The language server is not responding.');
+        return failGracefully(holder, 'The language server is not responding.');
       };
 
       request.send();
     });
-};
+  };
 
   // Create the players once the document is ready
   domReady(createAll());
-})(window);
+})();

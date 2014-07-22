@@ -3,13 +3,19 @@
   <head>
     <meta charset="UTF-8">
     <title>API Player</title>
-    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
     <script src="/javascript/audiojs/audio.min.js"></script>
     <script src="/javascript/player.js" async></script>
+    <style>
+      /*.tbplayer-error::before {
+        display: inline;
+        content: attr(data-error);
+      }*/
+    </style>
   </head>
   <body>
     <h1>API Tester</h1>
     <div class="tbplayer" data-location="ahk:02_mark:1"></div>
+    <div class="tbplayer" data-location="eng:04_john:3"></div>
     <div class="tbplayer" data-location="sqi:01_matthew:3"></div>
     <div class="tbplayer" data-location="dwd:01_matthew:3"></div>
     <div class="tbplayer" data-location="ewe:03_luke:49"></div>
