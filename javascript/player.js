@@ -1,7 +1,16 @@
 (function (window) {
   "use strict";
 
-  var domReady = function () {
+ // Create a namespace so that we're not polluting window
+  var TBPlayer = window.TBPlayer || {};
+
+  // Set configuration variables
+  TBPlayer.config = {
+    requestTarget: 'http://listen.talkingbibles.org/api/v1',
+    showFailures: true
+  };
+
+  TBPlayer.domReady = function () {
 
     var fns = [], listener
     , doc = document
@@ -19,15 +28,6 @@
       loaded ? fn() : fns.push(fn)
     }
 
-  };
-
-  // Create a namespace so that we're not polluting window
-  var TBPlayer = window.TBPlayer || {};
-
-  // Set configuration variables
-  TBPlayer.config = {
-    requestTarget: 'http://listen.talkingbibles.org/api/v1',
-    showFailures: true
   };
 
   TBPlayer.createPlayer = function (holder, location, data) {
@@ -104,5 +104,5 @@
 };
 
   // Create the players once the document is ready
-  domReady(TBPlayer.createAll());
+  TBPlayer.domReady(TBPlayer.createAll());
 })(window);
