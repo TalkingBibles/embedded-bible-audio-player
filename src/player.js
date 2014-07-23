@@ -34,15 +34,17 @@
         }
 
         crel(holder,
-            crel('style', '.tbplayer-info, .tbplayer-attribution { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; } .tbplayer-info { margin-bottom: 4px; font-size: 16px; font-weight: 500; } .tbplayer-attribution { margin-top: 4px; font-size: 12px; font-weight: 300; font-style: italic; }'),
-            crel('p', {class: 'tbplayer-info'},
-                crel('span', {class: 'tbplayer-info__book'}, data.title),
-                crel('span', {class: 'tbplayer-info__divider'}, ' - '),
-                crel('span', {class: 'tbplayer-info__chapter'}, data.chapters[cIndex].title)
-            ),
-            crel('audio', {class: 'tbplayer-controls', controls: 'controls', preload: 'metadata', src: data.chapters[cIndex].href}),
-            crel('p', {class: 'tbplayer-attribution'},
-                crel('a', {href: 'http://listen.talkingbibles.org/'}, 'Recording courtesy of Talking Bibles International')
+            crel('div', {class: 'tbplayer-inner'},
+                crel('style', '.tbplayer-inner { display: inline-block !important; } .tbplayer-info, .tbplayer-attribution { display: block !important; margin: 4px auto !important; font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important; color: #090909 !important; } .tbplayer-info { font-size: 16px !important; font-weight: 600 !important; } .tbplayer-attribution { text-align: right; font-size: 12px !important; font-weight: 300 !important; font-style: italic !important; } .tbplayer-attribution a { display: inline !important; } .tbplayer-attribution a:link, .tbplayer-attribution a:visited, .tbplayer-attribution a:hover, .tbplayer-attribution a:active { text-decoration: none !important; border-bottom: 1px solid #666 !important; color: #666 !important; }'),
+                crel('p', {class: 'tbplayer-info'},
+                    crel('span', {class: 'tbplayer-info__book'}, data.title),
+                    crel('span', {class: 'tbplayer-info__divider'}, ' – '),
+                    crel('span', {class: 'tbplayer-info__chapter'}, data.chapters[cIndex].title)
+                ),
+                crel('audio', {class: 'tbplayer-controls', controls: 'controls', preload: 'metadata', src: data.chapters[cIndex].href}),
+                crel('p', {class: 'tbplayer-attribution'},
+                    crel('a', {href: 'http://listen.talkingbibles.org/language/' + location[0] + '/' + location[1] + '/'}, 'Continue listening at Talking Bibles')
+                )
             )
         );
 
