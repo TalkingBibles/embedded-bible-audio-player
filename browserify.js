@@ -1,4 +1,5 @@
 var browserify = require('browserify');
+var fs = require('fs');
 
 var bundler = browserify(__dirname + '/src/index.js');
 
@@ -7,4 +8,4 @@ bundler.transform({
 }, 'uglifyify');
 
 bundler.bundle()
-	.pipe(process.stdout);
+	.pipe(fs.createWriteStream(__dirname + '/build/tbplayer.' + new Date().valueOf() + '.min.js'));
