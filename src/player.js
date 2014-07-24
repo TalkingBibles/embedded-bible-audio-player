@@ -44,7 +44,7 @@
 
 
     var createPlayer = function (holder, location, data) {
-        var cIndex = Number(location[2]);
+        var cIndex = Number(location[2]) - 1;
 
         if (!data.title || !(data.chapters instanceof Array)) {
             return failGracefully(holder, 'The requested book could not be found.');
