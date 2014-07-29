@@ -45,14 +45,18 @@
     var getTracker = function () {
         if (typeof ga !== 'undefined') {
             return function (category, action, label, value) {
-                ga('send', 'event', category, action, label, 1);
+                console.log('universal tracking');
+                ga('send', 'event', category, action, label, {'nonInteraction': 1});
             }
         } else if (typeof _gaq !== 'undefined') {
             return function (category, action, label, value) {
+                console.log('classic tracking');
                 _gaq.push(['_trackEvent', category, action, label]);
             }
         } else {
-            return function () {};
+            return function () {
+                console.log('no tracking');
+            };
         }
     }
     var track = getTracker();
@@ -92,26 +96,25 @@
             )
         );
 
-        if (typeof _gaq !== 'undefined') {
-            var playEvent = function (e) {
-                removeEvent(e, arguments.callee);
-                track('Embedded Audio Scripture', 'Play', location.join(':'));
-            };
+        var playEvent = function (e) {
+            console.log('play event hit');
+            removeEvent(e, arguments.callee);
+            track('Embedded Audio Scripture', 'Play', location.join(':'));
+        };
 
-            var endEvent = function (e) {
-                removeEvent(e, arguments.callee);
-                track('Embedded Audio Scripture', 'End', location.join(':'));
-            };
+        var endEvent = function (e) {
+            removeEvent(e, arguments.callee);
+            track('Embedded Audio Scripture', 'End', location.join(':'));
+        };
 
-            var errorEvent = function (e) {
-                console.log(e);
-                track('Embedded Audio Scripture', 'Playback Error', location.join(':'));
-            }
-
-            addEvent(audioElement, 'play', playEvent);
-            addEvent(audioElement, 'ended', endEvent);
-            addEvent(audioElement, 'error', errorEvent);
+        var errorEvent = function (e) {
+            console.log(e);
+            track('Embedded Audio Scripture', 'Playback Error', location.join(':'));
         }
+
+        addEvent(audioElement, 'play', playEvent);
+        addEvent(audioElement, 'ended', endEvent);
+        addEvent(audioElement, 'error', errorEvent);
         
         addClass(holder, 'tbplayer-success');
     };
