@@ -42,6 +42,21 @@
         }
     };
 
+    var getTracker = function () {
+        if (typeof ga !== 'undefined') {
+            return function (category, action, label, value) {
+                ga('send', 'event', category, action, label, 1);
+            }
+        } else if (typeof _gaq !== 'undefined') {
+            return function (category, action, label, value) {
+                _gaq.push(['_trackEvent', category, action, label]);
+            }
+        } else {
+            return function () {};
+        }
+    }
+    var track = getTracker();
+
 
     var createPlayer = function (holder, location, data) {
         var cIndex = Number(location[2]) - 1;
@@ -80,17 +95,17 @@
         if (typeof _gaq !== 'undefined') {
             var playEvent = function (e) {
                 removeEvent(e, arguments.callee);
-                _gaq.push(['_trackEvent', 'Embedded Audio Scripture', 'Play', location.join(':')]);
+                track('Embedded Audio Scripture', 'Play', location.join(':'));
             };
 
             var endEvent = function (e) {
                 removeEvent(e, arguments.callee);
-                _gaq.push(['_trackEvent', 'Embedded Audio Scripture', 'End', location.join(':')]);
+                track('Embedded Audio Scripture', 'End', location.join(':'));
             };
 
             var errorEvent = function (e) {
                 console.log(e);
-                _gaq.push(['_trackEvent', 'Embedded Audio Scripture', 'Playback Error', location.join(':')]);
+                track('Embedded Audio Scripture', 'Playback Error', location.join(':'));
             }
 
             addEvent(audioElement, 'play', playEvent);
@@ -107,7 +122,6 @@
         addClass(holder, 'tbplayer-error');
 
         if (typeof _gaq !== 'undefined') {
-            _gaq.push(['_trackEvent', 'Embedded Audio Scripture', message, location.join(':')]);
         }
     };
 
