@@ -45,17 +45,17 @@
     var getTracker = function () {
         if (typeof ga !== 'undefined') {
             return function (category, action, label, value) {
-                console.log('universal tracking');
+                console.log('Tracked event');
                 ga('send', 'event', category, action, label, {'nonInteraction': 1});
             }
         } else if (typeof _gaq !== 'undefined') {
             return function (category, action, label, value) {
-                console.log('classic tracking');
+                console.log('Tracked event');
                 _gaq.push(['_trackEvent', category, action, label]);
             }
         } else {
             return function () {
-                console.log('no tracking');
+                console.log('Did not track event');                
             };
         }
     }
@@ -97,7 +97,6 @@
         );
 
         var playEvent = function (e) {
-            console.log('play event hit');
             removeEvent(e, arguments.callee);
             track('Embedded Audio Scripture', 'Play', location.join(':'));
         };
