@@ -59,8 +59,6 @@
             };
         }
     }
-    var track = getTracker();
-
 
     var createPlayer = function (holder, location, data) {
         var cIndex = Number(location[2]) - 1;
@@ -69,7 +67,7 @@
             return failGracefully(holder, 'The requested book could not be found.');
         }
 
-        if (!data.chapters[cIndex] || !data.chapters[cIndex].href || !data.chapters[cIndex].title) {
+        if (!data.chapters[cIndex] || !(data.chapters[cIndex].mp3 || data.chapters[cIndex].ogg) || !data.chapters[cIndex].title) {
             return failGracefully(holder, 'The requested chapter could not be found.');
         }
 
@@ -89,7 +87,11 @@
                     crel('span', {class: 'tbplayer-info__divider'}, ' – '),
                     crel('span', {class: 'tbplayer-info__reference'}, reference)
                 ),
-                audioElement = crel('audio', {class: 'tbplayer-controls', controls: 'controls', preload: 'metadata', src: data.chapters[cIndex].href}),
+                audioElement = crel('audio', {class: 'tbplayer-controls', controls: 'controls', preload: 'metadata'},
+                    crel('span', {class: 'tbplayer-no_support'}, 'Your browser does not support playing audio files.'),
+                    crel('source', {src: data.chapters[cIndex].mp3, type: 'audio/mp3'}),
+                    crel('source', {src: data.chapters[cIndex].ogg, type: 'audio/ogg'})
+                ),
                 crel('p', {class: 'tbplayer-attribution'},
                     crel('a', {href: 'http://listen.talkingbibles.org/language/' + location[0] + '/' + location[1] + '/'}, 'Continue listening at Talking Bibles')
                 )
@@ -97,16 +99,19 @@
         );
 
         var playEvent = function (e) {
+            var track = getTracker();
             removeEvent(e, arguments.callee);
             track('Embedded Audio Scripture', 'Play', location.join(':'));
         };
 
         var endEvent = function (e) {
+            var track = getTracker();
             removeEvent(e, arguments.callee);
             track('Embedded Audio Scripture', 'End', location.join(':'));
         };
 
         var errorEvent = function (e) {
+            var track = getTracker();
             console.log(e);
             track('Embedded Audio Scripture', 'Playback Error', location.join(':'));
         }
