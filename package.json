@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "serve": "./node_modules/.bin/beefy src/index.js 8000 --index test/player.html",
-    "build": "./node_modules/.bin/browserify -g uglifyify ./src/index.js > ./build/tbplayer.min.js"
+    "build": "node browserify.js"
   },
   "devDependencies": {
     "beefy": "latest",
