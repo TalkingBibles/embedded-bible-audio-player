@@ -1,0 +1,484 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/claysmith/local/bin/node',
+1 verbose cli   '/home/claysmith/local/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 warn package.json tbplayer@0.1.0 No description
+5 warn package.json tbplayer@0.1.0 No repository field.
+6 warn package.json tbplayer@0.1.0 No README data
+7 verbose readDependencies using package.json deps
+8 verbose install where, deps [ '/home/claysmith/Projects/embedded-player',
+8 verbose install   [ 'beefy',
+8 verbose install     'browserify',
+8 verbose install     'crel',
+8 verbose install     'domready',
+8 verbose install     'uglifyify',
+8 verbose install     'JSONP',
+8 verbose install     'reqwest' ] ]
+9 info preinstall tbplayer@0.1.0
+10 verbose readDependencies using package.json deps
+11 verbose already installed skipping crel@^1.1.2 /home/claysmith/Projects/embedded-player
+12 verbose cache add [ 'domready@latest', null ]
+13 verbose cache add name=undefined spec="domready@latest" args=["domready@latest",null]
+14 verbose parsed url { protocol: null,
+14 verbose parsed url   slashes: null,
+14 verbose parsed url   auth: null,
+14 verbose parsed url   host: null,
+14 verbose parsed url   port: null,
+14 verbose parsed url   hostname: null,
+14 verbose parsed url   hash: null,
+14 verbose parsed url   search: null,
+14 verbose parsed url   query: null,
+14 verbose parsed url   pathname: 'domready@latest',
+14 verbose parsed url   path: 'domready@latest',
+14 verbose parsed url   href: 'domready@latest' }
+15 verbose cache add [ 'uglifyify@latest', null ]
+16 verbose cache add name=undefined spec="uglifyify@latest" args=["uglifyify@latest",null]
+17 verbose parsed url { protocol: null,
+17 verbose parsed url   slashes: null,
+17 verbose parsed url   auth: null,
+17 verbose parsed url   host: null,
+17 verbose parsed url   port: null,
+17 verbose parsed url   hostname: null,
+17 verbose parsed url   hash: null,
+17 verbose parsed url   search: null,
+17 verbose parsed url   query: null,
+17 verbose parsed url   pathname: 'uglifyify@latest',
+17 verbose parsed url   path: 'uglifyify@latest',
+17 verbose parsed url   href: 'uglifyify@latest' }
+18 verbose cache add name="domready" spec="latest" args=["domready","latest"]
+19 verbose parsed url { protocol: null,
+19 verbose parsed url   slashes: null,
+19 verbose parsed url   auth: null,
+19 verbose parsed url   host: null,
+19 verbose parsed url   port: null,
+19 verbose parsed url   hostname: null,
+19 verbose parsed url   hash: null,
+19 verbose parsed url   search: null,
+19 verbose parsed url   query: null,
+19 verbose parsed url   pathname: 'latest',
+19 verbose parsed url   path: 'latest',
+19 verbose parsed url   href: 'latest' }
+20 verbose addNamed [ 'domready', 'latest' ]
+21 verbose addNamed [ null, null ]
+22 verbose cache add name="uglifyify" spec="latest" args=["uglifyify","latest"]
+23 verbose parsed url { protocol: null,
+23 verbose parsed url   slashes: null,
+23 verbose parsed url   auth: null,
+23 verbose parsed url   host: null,
+23 verbose parsed url   port: null,
+23 verbose parsed url   hostname: null,
+23 verbose parsed url   hash: null,
+23 verbose parsed url   search: null,
+23 verbose parsed url   query: null,
+23 verbose parsed url   pathname: 'latest',
+23 verbose parsed url   path: 'latest',
+23 verbose parsed url   href: 'latest' }
+24 verbose addNamed [ 'uglifyify', 'latest' ]
+25 verbose addNamed [ null, null ]
+26 verbose cache add [ 'JSONP@https://github.com/larryosborn/JSONP#master', null ]
+27 verbose cache add name=undefined spec="JSONP@https://github.com/larryosborn/JSONP#master" args=["JSONP@https://github.com/larryosborn/JSONP#master",null]
+28 verbose parsed url { protocol: null,
+28 verbose parsed url   slashes: null,
+28 verbose parsed url   auth: null,
+28 verbose parsed url   host: null,
+28 verbose parsed url   port: null,
+28 verbose parsed url   hostname: null,
+28 verbose parsed url   hash: '#master',
+28 verbose parsed url   search: null,
+28 verbose parsed url   query: null,
+28 verbose parsed url   pathname: 'JSONP@https://github.com/larryosborn/JSONP',
+28 verbose parsed url   path: 'JSONP@https://github.com/larryosborn/JSONP',
+28 verbose parsed url   href: 'JSONP@https://github.com/larryosborn/JSONP#master' }
+29 silly lockFile f35b8d7e-domready-latest domready@latest
+30 verbose lock domready@latest /home/claysmith/.npm/f35b8d7e-domready-latest.lock
+31 silly lockFile ba648860-uglifyify-latest uglifyify@latest
+32 verbose lock uglifyify@latest /home/claysmith/.npm/ba648860-uglifyify-latest.lock
+33 verbose cache add [ 'reqwest@^1.1.4', null ]
+34 verbose cache add name=undefined spec="reqwest@^1.1.4" args=["reqwest@^1.1.4",null]
+35 verbose parsed url { protocol: null,
+35 verbose parsed url   slashes: null,
+35 verbose parsed url   auth: null,
+35 verbose parsed url   host: null,
+35 verbose parsed url   port: null,
+35 verbose parsed url   hostname: null,
+35 verbose parsed url   hash: null,
+35 verbose parsed url   search: null,
+35 verbose parsed url   query: null,
+35 verbose parsed url   pathname: 'reqwest@^1.1.4',
+35 verbose parsed url   path: 'reqwest@^1.1.4',
+35 verbose parsed url   href: 'reqwest@^1.1.4' }
+36 verbose cache add name="JSONP" spec="https://github.com/larryosborn/JSONP#master" args=["JSONP","https://github.com/larryosborn/JSONP#master"]
+37 verbose parsed url { protocol: 'https:',
+37 verbose parsed url   slashes: true,
+37 verbose parsed url   auth: null,
+37 verbose parsed url   host: 'github.com',
+37 verbose parsed url   port: null,
+37 verbose parsed url   hostname: 'github.com',
+37 verbose parsed url   hash: '#master',
+37 verbose parsed url   search: null,
+37 verbose parsed url   query: null,
+37 verbose parsed url   pathname: '/larryosborn/JSONP',
+37 verbose parsed url   path: '/larryosborn/JSONP',
+37 verbose parsed url   href: 'https://github.com/larryosborn/JSONP#master' }
+38 silly lockFile c6d5b206-hub-com-larryosborn-JSONP-master https://github.com/larryosborn/JSONP#master
+39 verbose lock https://github.com/larryosborn/JSONP#master /home/claysmith/.npm/c6d5b206-hub-com-larryosborn-JSONP-master.lock
+40 verbose cache add name="reqwest" spec="^1.1.4" args=["reqwest","^1.1.4"]
+41 verbose parsed url { protocol: null,
+41 verbose parsed url   slashes: null,
+41 verbose parsed url   auth: null,
+41 verbose parsed url   host: null,
+41 verbose parsed url   port: null,
+41 verbose parsed url   hostname: null,
+41 verbose parsed url   hash: null,
+41 verbose parsed url   search: null,
+41 verbose parsed url   query: null,
+41 verbose parsed url   pathname: '^1.1.4',
+41 verbose parsed url   path: '^1.1.4',
+41 verbose parsed url   href: '^1.1.4' }
+42 verbose addNamed [ 'reqwest', '^1.1.4' ]
+43 verbose addNamed [ null, '>=1.1.4-0 <2.0.0-0' ]
+44 silly lockFile d5601039-reqwest-1-1-4 reqwest@^1.1.4
+45 verbose lock reqwest@^1.1.4 /home/claysmith/.npm/d5601039-reqwest-1-1-4.lock
+46 info addNameTag [ 'domready', 'latest' ]
+47 verbose cache add [ 'beefy@latest', null ]
+48 verbose cache add name=undefined spec="beefy@latest" args=["beefy@latest",null]
+49 verbose parsed url { protocol: null,
+49 verbose parsed url   slashes: null,
+49 verbose parsed url   auth: null,
+49 verbose parsed url   host: null,
+49 verbose parsed url   port: null,
+49 verbose parsed url   hostname: null,
+49 verbose parsed url   hash: null,
+49 verbose parsed url   search: null,
+49 verbose parsed url   query: null,
+49 verbose parsed url   pathname: 'beefy@latest',
+49 verbose parsed url   path: 'beefy@latest',
+49 verbose parsed url   href: 'beefy@latest' }
+50 verbose cache add [ 'browserify@latest', null ]
+51 verbose cache add name=undefined spec="browserify@latest" args=["browserify@latest",null]
+52 verbose parsed url { protocol: null,
+52 verbose parsed url   slashes: null,
+52 verbose parsed url   auth: null,
+52 verbose parsed url   host: null,
+52 verbose parsed url   port: null,
+52 verbose parsed url   hostname: null,
+52 verbose parsed url   hash: null,
+52 verbose parsed url   search: null,
+52 verbose parsed url   query: null,
+52 verbose parsed url   pathname: 'browserify@latest',
+52 verbose parsed url   path: 'browserify@latest',
+52 verbose parsed url   href: 'browserify@latest' }
+53 info addNameTag [ 'uglifyify', 'latest' ]
+54 verbose addRemoteTarball [ 'https://github.com/larryosborn/JSONP#master', null ]
+55 verbose cache add name="beefy" spec="latest" args=["beefy","latest"]
+56 verbose parsed url { protocol: null,
+56 verbose parsed url   slashes: null,
+56 verbose parsed url   auth: null,
+56 verbose parsed url   host: null,
+56 verbose parsed url   port: null,
+56 verbose parsed url   hostname: null,
+56 verbose parsed url   hash: null,
+56 verbose parsed url   search: null,
+56 verbose parsed url   query: null,
+56 verbose parsed url   pathname: 'latest',
+56 verbose parsed url   path: 'latest',
+56 verbose parsed url   href: 'latest' }
+57 verbose addNamed [ 'beefy', 'latest' ]
+58 verbose addNamed [ null, null ]
+59 silly lockFile 2d32b18b-beefy-latest beefy@latest
+60 verbose lock beefy@latest /home/claysmith/.npm/2d32b18b-beefy-latest.lock
+61 verbose cache add name="browserify" spec="latest" args=["browserify","latest"]
+62 verbose parsed url { protocol: null,
+62 verbose parsed url   slashes: null,
+62 verbose parsed url   auth: null,
+62 verbose parsed url   host: null,
+62 verbose parsed url   port: null,
+62 verbose parsed url   hostname: null,
+62 verbose parsed url   hash: null,
+62 verbose parsed url   search: null,
+62 verbose parsed url   query: null,
+62 verbose parsed url   pathname: 'latest',
+62 verbose parsed url   path: 'latest',
+62 verbose parsed url   href: 'latest' }
+63 verbose addNamed [ 'browserify', 'latest' ]
+64 verbose addNamed [ null, null ]
+65 silly lockFile 97edd6c9-browserify-latest browserify@latest
+66 verbose lock browserify@latest /home/claysmith/.npm/97edd6c9-browserify-latest.lock
+67 silly addNameRange { name: 'reqwest', range: '>=1.1.4-0 <2.0.0-0', hasData: false }
+68 info addNameTag [ 'beefy', 'latest' ]
+69 info addNameTag [ 'browserify', 'latest' ]
+70 verbose request where is /domready
+71 verbose request registry https://registry.npmjs.org/
+72 verbose request id 41f1ffb780e775ea
+73 verbose url raw /domready
+74 verbose url resolving [ 'https://registry.npmjs.org/', './domready' ]
+75 verbose url resolved https://registry.npmjs.org/domready
+76 verbose request where is https://registry.npmjs.org/domready
+77 info trying registry request attempt 1 at 13:31:24
+78 verbose etag "6KRXFX72KBQRZW81Q3JPFNSWJ"
+79 http GET https://registry.npmjs.org/domready
+80 verbose request where is /uglifyify
+81 verbose request registry https://registry.npmjs.org/
+82 verbose url raw /uglifyify
+83 verbose url resolving [ 'https://registry.npmjs.org/', './uglifyify' ]
+84 verbose url resolved https://registry.npmjs.org/uglifyify
+85 verbose request where is https://registry.npmjs.org/uglifyify
+86 info trying registry request attempt 1 at 13:31:24
+87 verbose etag "8DJJT5MMIRVN2ZMROT950XR9"
+88 http GET https://registry.npmjs.org/uglifyify
+89 info retry fetch attempt 1 at 13:31:24
+90 verbose fetch to= /tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP
+91 verbose request where is /reqwest
+92 verbose request registry https://registry.npmjs.org/
+93 verbose url raw /reqwest
+94 verbose url resolving [ 'https://registry.npmjs.org/', './reqwest' ]
+95 verbose url resolved https://registry.npmjs.org/reqwest
+96 verbose request where is https://registry.npmjs.org/reqwest
+97 info trying registry request attempt 1 at 13:31:24
+98 verbose etag "428KMP5RQEQHIM8FZSCG40TPI"
+99 http GET https://registry.npmjs.org/reqwest
+100 verbose request where is /beefy
+101 verbose request registry https://registry.npmjs.org/
+102 verbose url raw /beefy
+103 verbose url resolving [ 'https://registry.npmjs.org/', './beefy' ]
+104 verbose url resolved https://registry.npmjs.org/beefy
+105 verbose request where is https://registry.npmjs.org/beefy
+106 info trying registry request attempt 1 at 13:31:24
+107 verbose etag "D2CS9XIGYG2Z7Y489R16ZN5TB"
+108 http GET https://registry.npmjs.org/beefy
+109 verbose request where is /browserify
+110 verbose request registry https://registry.npmjs.org/
+111 verbose url raw /browserify
+112 verbose url resolving [ 'https://registry.npmjs.org/', './browserify' ]
+113 verbose url resolved https://registry.npmjs.org/browserify
+114 verbose request where is https://registry.npmjs.org/browserify
+115 info trying registry request attempt 1 at 13:31:24
+116 verbose etag "7NI55Q7NGUO9FP9E3BRAJW5BX"
+117 http GET https://registry.npmjs.org/browserify
+118 http GET https://github.com/larryosborn/JSONP#master
+119 http 304 https://registry.npmjs.org/uglifyify
+120 silly registry.get cb [ 304,
+120 silly registry.get   { date: 'Mon, 13 Oct 2014 20:31:25 GMT',
+120 silly registry.get     server: 'Apache',
+120 silly registry.get     via: '1.1 varnish',
+120 silly registry.get     'last-modified': 'Mon, 13 Oct 2014 20:31:25 GMT',
+120 silly registry.get     'cache-control': 'max-age=60',
+120 silly registry.get     etag: '"8DJJT5MMIRVN2ZMROT950XR9"',
+120 silly registry.get     age: '13645',
+120 silly registry.get     'x-served-by': 'cache-sjc3132-SJC',
+120 silly registry.get     'x-cache': 'MISS',
+120 silly registry.get     'x-cache-hits': '0',
+120 silly registry.get     'x-timer': 'S1413232285.051687,VS0,VE85',
+120 silly registry.get     vary: 'Accept',
+120 silly registry.get     'content-length': '0',
+120 silly registry.get     'keep-alive': 'timeout=10, max=50',
+120 silly registry.get     connection: 'Keep-Alive' } ]
+121 verbose etag https://registry.npmjs.org/uglifyify from cache
+122 verbose addNamed [ 'uglifyify', '2.5.0' ]
+123 verbose addNamed [ '2.5.0', '2.5.0' ]
+124 silly lockFile fa610851-uglifyify-2-5-0 uglifyify@2.5.0
+125 verbose lock uglifyify@2.5.0 /home/claysmith/.npm/fa610851-uglifyify-2-5-0.lock
+126 http 304 https://registry.npmjs.org/beefy
+127 silly registry.get cb [ 304,
+127 silly registry.get   { date: 'Mon, 13 Oct 2014 20:31:25 GMT',
+127 silly registry.get     server: 'Apache',
+127 silly registry.get     via: '1.1 varnish',
+127 silly registry.get     'last-modified': 'Mon, 13 Oct 2014 20:31:25 GMT',
+127 silly registry.get     'cache-control': 'max-age=60',
+127 silly registry.get     etag: '"D2CS9XIGYG2Z7Y489R16ZN5TB"',
+127 silly registry.get     age: '0',
+127 silly registry.get     'x-served-by': 'cache-lax1427-LAX',
+127 silly registry.get     'x-cache': 'MISS',
+127 silly registry.get     'x-cache-hits': '0',
+127 silly registry.get     'x-timer': 'S1413232285.072872,VS0,VE81',
+127 silly registry.get     vary: 'Accept',
+127 silly registry.get     'content-length': '0',
+127 silly registry.get     'keep-alive': 'timeout=10, max=50',
+127 silly registry.get     connection: 'Keep-Alive' } ]
+128 verbose etag https://registry.npmjs.org/beefy from cache
+129 silly lockFile fa610851-uglifyify-2-5-0 uglifyify@2.5.0
+130 silly lockFile fa610851-uglifyify-2-5-0 uglifyify@2.5.0
+131 silly lockFile ba648860-uglifyify-latest uglifyify@latest
+132 silly lockFile ba648860-uglifyify-latest uglifyify@latest
+133 verbose addNamed [ 'beefy', '2.1.1' ]
+134 verbose addNamed [ '2.1.1', '2.1.1' ]
+135 silly lockFile 85dcb76c-beefy-2-1-1 beefy@2.1.1
+136 verbose lock beefy@2.1.1 /home/claysmith/.npm/85dcb76c-beefy-2-1-1.lock
+137 http 304 https://registry.npmjs.org/domready
+138 silly registry.get cb [ 304,
+138 silly registry.get   { date: 'Mon, 13 Oct 2014 20:31:25 GMT',
+138 silly registry.get     server: 'Apache',
+138 silly registry.get     via: '1.1 varnish',
+138 silly registry.get     'last-modified': 'Mon, 13 Oct 2014 20:31:25 GMT',
+138 silly registry.get     'cache-control': 'max-age=60',
+138 silly registry.get     etag: '"6KRXFX72KBQRZW81Q3JPFNSWJ"',
+138 silly registry.get     age: '5934',
+138 silly registry.get     'x-served-by': 'cache-sjc3126-SJC',
+138 silly registry.get     'x-cache': 'MISS',
+138 silly registry.get     'x-cache-hits': '0',
+138 silly registry.get     'x-timer': 'S1413232285.010980,VS0,VE146',
+138 silly registry.get     vary: 'Accept',
+138 silly registry.get     'content-length': '0',
+138 silly registry.get     'keep-alive': 'timeout=10, max=50',
+138 silly registry.get     connection: 'Keep-Alive' } ]
+139 verbose etag https://registry.npmjs.org/domready from cache
+140 http 304 https://registry.npmjs.org/browserify
+141 silly registry.get cb [ 304,
+141 silly registry.get   { date: 'Mon, 13 Oct 2014 20:31:25 GMT',
+141 silly registry.get     server: 'Apache',
+141 silly registry.get     via: '1.1 varnish',
+141 silly registry.get     'last-modified': 'Mon, 13 Oct 2014 20:31:25 GMT',
+141 silly registry.get     'cache-control': 'max-age=60',
+141 silly registry.get     etag: '"7NI55Q7NGUO9FP9E3BRAJW5BX"',
+141 silly registry.get     age: '518',
+141 silly registry.get     'x-served-by': 'cache-sjc3126-SJC',
+141 silly registry.get     'x-cache': 'HIT',
+141 silly registry.get     'x-cache-hits': '1',
+141 silly registry.get     'x-timer': 'S1413232285.161754,VS0,VE3',
+141 silly registry.get     vary: 'Accept',
+141 silly registry.get     'content-length': '0',
+141 silly registry.get     'keep-alive': 'timeout=10, max=50',
+141 silly registry.get     connection: 'Keep-Alive' } ]
+142 verbose etag https://registry.npmjs.org/browserify from cache
+143 silly lockFile 85dcb76c-beefy-2-1-1 beefy@2.1.1
+144 silly lockFile 85dcb76c-beefy-2-1-1 beefy@2.1.1
+145 silly lockFile 2d32b18b-beefy-latest beefy@latest
+146 silly lockFile 2d32b18b-beefy-latest beefy@latest
+147 verbose addNamed [ 'domready', '1.0.7' ]
+148 verbose addNamed [ '1.0.7', '1.0.7' ]
+149 silly lockFile 5b0eb879-domready-1-0-7 domready@1.0.7
+150 verbose lock domready@1.0.7 /home/claysmith/.npm/5b0eb879-domready-1-0-7.lock
+151 info already installed uglifyify@2.5.0
+152 silly lockFile 5b0eb879-domready-1-0-7 domready@1.0.7
+153 silly lockFile 5b0eb879-domready-1-0-7 domready@1.0.7
+154 silly lockFile f35b8d7e-domready-latest domready@latest
+155 silly lockFile f35b8d7e-domready-latest domready@latest
+156 verbose addNamed [ 'browserify', '6.1.0' ]
+157 verbose addNamed [ '6.1.0', '6.1.0' ]
+158 silly lockFile 6124d3ad-browserify-6-1-0 browserify@6.1.0
+159 verbose lock browserify@6.1.0 /home/claysmith/.npm/6124d3ad-browserify-6-1-0.lock
+160 silly lockFile 6124d3ad-browserify-6-1-0 browserify@6.1.0
+161 silly lockFile 6124d3ad-browserify-6-1-0 browserify@6.1.0
+162 silly lockFile 97edd6c9-browserify-latest browserify@latest
+163 silly lockFile 97edd6c9-browserify-latest browserify@latest
+164 http 200 https://github.com/larryosborn/JSONP#master
+165 verbose tar unpack /tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP
+166 silly lockFile 270bab6c-hub-com-larryosborn-JSONP-unpack tar:///tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP-unpack
+167 verbose lock tar:///tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP-unpack /home/claysmith/.npm/270bab6c-hub-com-larryosborn-JSONP-unpack.lock
+168 silly lockFile f3bfa3ea-NU2-github-com-larryosborn-JSONP tar:///tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP
+169 verbose lock tar:///tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP /home/claysmith/.npm/f3bfa3ea-NU2-github-com-larryosborn-JSONP.lock
+170 silly gunzTarPerm modes [ '775', '664' ]
+171 error not a package /tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP
+172 silly lockFile 270bab6c-hub-com-larryosborn-JSONP-unpack tar:///tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP-unpack
+173 silly lockFile 270bab6c-hub-com-larryosborn-JSONP-unpack tar:///tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP-unpack
+174 silly lockFile f3bfa3ea-NU2-github-com-larryosborn-JSONP tar:///tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP
+175 silly lockFile f3bfa3ea-NU2-github-com-larryosborn-JSONP tar:///tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP
+176 silly lockFile c6d5b206-hub-com-larryosborn-JSONP-master https://github.com/larryosborn/JSONP#master
+177 silly lockFile c6d5b206-hub-com-larryosborn-JSONP-master https://github.com/larryosborn/JSONP#master
+178 http 304 https://registry.npmjs.org/reqwest
+179 silly registry.get cb [ 304,
+179 silly registry.get   { date: 'Mon, 13 Oct 2014 20:31:30 GMT',
+179 silly registry.get     server: 'Apache',
+179 silly registry.get     via: '1.1 varnish',
+179 silly registry.get     'last-modified': 'Mon, 13 Oct 2014 20:31:30 GMT',
+179 silly registry.get     'cache-control': 'max-age=60',
+179 silly registry.get     etag: '"428KMP5RQEQHIM8FZSCG40TPI"',
+179 silly registry.get     age: '0',
+179 silly registry.get     'x-served-by': 'cache-sjc3125-SJC',
+179 silly registry.get     'x-cache': 'MISS',
+179 silly registry.get     'x-cache-hits': '0',
+179 silly registry.get     'x-timer': 'S1413232290.032503,VS0,VE557',
+179 silly registry.get     vary: 'Accept',
+179 silly registry.get     'content-length': '0',
+179 silly registry.get     'keep-alive': 'timeout=10, max=50',
+179 silly registry.get     connection: 'Keep-Alive' } ]
+180 verbose etag https://registry.npmjs.org/reqwest from cache
+181 silly addNameRange number 2 { name: 'reqwest', range: '>=1.1.4-0 <2.0.0-0', hasData: true }
+182 silly addNameRange versions [ 'reqwest',
+182 silly addNameRange   [ '0.0.1',
+182 silly addNameRange     '0.0.2',
+182 silly addNameRange     '0.0.3',
+182 silly addNameRange     '0.0.4',
+182 silly addNameRange     '0.0.5',
+182 silly addNameRange     '0.0.6',
+182 silly addNameRange     '0.0.7',
+182 silly addNameRange     '0.0.8',
+182 silly addNameRange     '0.0.9',
+182 silly addNameRange     '0.1.0',
+182 silly addNameRange     '0.1.1',
+182 silly addNameRange     '0.1.2',
+182 silly addNameRange     '0.1.3',
+182 silly addNameRange     '0.1.4',
+182 silly addNameRange     '0.1.5',
+182 silly addNameRange     '0.1.6',
+182 silly addNameRange     '0.1.7',
+182 silly addNameRange     '0.1.8',
+182 silly addNameRange     '0.1.9',
+182 silly addNameRange     '0.2.0',
+182 silly addNameRange     '0.2.1',
+182 silly addNameRange     '0.2.2',
+182 silly addNameRange     '0.2.3',
+182 silly addNameRange     '0.2.4',
+182 silly addNameRange     '0.2.5',
+182 silly addNameRange     '0.2.7',
+182 silly addNameRange     '0.2.8',
+182 silly addNameRange     '0.3.0',
+182 silly addNameRange     '0.3.1',
+182 silly addNameRange     '0.3.2',
+182 silly addNameRange     '0.3.3',
+182 silly addNameRange     '0.4.0',
+182 silly addNameRange     '0.4.1',
+182 silly addNameRange     '0.4.2',
+182 silly addNameRange     '0.4.3',
+182 silly addNameRange     '0.4.5',
+182 silly addNameRange     '0.5.0',
+182 silly addNameRange     '0.5.1',
+182 silly addNameRange     '0.6.0',
+182 silly addNameRange     '0.6.1',
+182 silly addNameRange     '0.6.2',
+182 silly addNameRange     '0.6.4',
+182 silly addNameRange     '0.6.5',
+182 silly addNameRange     '0.7.0',
+182 silly addNameRange     '0.7.1',
+182 silly addNameRange     '0.7.2',
+182 silly addNameRange     '0.7.3',
+182 silly addNameRange     '0.8.0',
+182 silly addNameRange     '0.8.1',
+182 silly addNameRange     '0.8.2',
+182 silly addNameRange     '0.9.0',
+182 silly addNameRange     '0.9.1',
+182 silly addNameRange     '0.9.2',
+182 silly addNameRange     '0.9.3',
+182 silly addNameRange     '0.9.4',
+182 silly addNameRange     '0.9.5',
+182 silly addNameRange     '0.9.6',
+182 silly addNameRange     '0.9.7',
+182 silly addNameRange     '1.0.1',
+182 silly addNameRange     '1.0.2',
+182 silly addNameRange     '1.1.0',
+182 silly addNameRange     '1.1.2',
+182 silly addNameRange     '1.1.3',
+182 silly addNameRange     '1.1.4' ] ]
+183 verbose addNamed [ 'reqwest', '1.1.4' ]
+184 verbose addNamed [ '1.1.4', '1.1.4' ]
+185 silly lockFile cb9596ba-reqwest-1-1-4 reqwest@1.1.4
+186 verbose lock reqwest@1.1.4 /home/claysmith/.npm/cb9596ba-reqwest-1-1-4.lock
+187 silly lockFile cb9596ba-reqwest-1-1-4 reqwest@1.1.4
+188 silly lockFile cb9596ba-reqwest-1-1-4 reqwest@1.1.4
+189 silly lockFile d5601039-reqwest-1-1-4 reqwest@^1.1.4
+190 silly lockFile d5601039-reqwest-1-1-4 reqwest@^1.1.4
+191 error Error: ENOENT, open '/tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP-unpack/package.json'
+192 error If you need help, you may report this *entire* log,
+192 error including the npm and node versions, at:
+192 error     <http://github.com/npm/npm/issues>
+193 error System Linux 3.13.0-37-generic
+194 error command "/home/claysmith/local/bin/node" "/home/claysmith/local/bin/npm" "install"
+195 error cwd /home/claysmith/Projects/embedded-player
+196 error node -v v0.10.32
+197 error npm -v 1.4.28
+198 error path /tmp/npm-17929-awi4nNU2/github.com/larryosborn/JSONP-unpack/package.json
+199 error code ENOENT
+200 error errno 34
+201 verbose exit [ 34, true ]

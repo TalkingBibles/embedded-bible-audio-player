@@ -11,6 +11,6 @@
     "crel": "^1.1.2",
     "domready": "latest",
     "uglifyify": "latest",
-    "JSONP": "https://github.com/larryosborn/JSONP#master"
+    "reqwest": "^1.1.4"
   }
 }
