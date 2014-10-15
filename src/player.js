@@ -125,30 +125,35 @@ var failGracefully = function(holder, message) {
 };
 
 var player = function () {
-    var holders = document.querySelectorAll('.tbplayer');
+    var a = document.createElement('audio');
+    if (!!(a.canPlayType && (a.canPlayType('audio/mpeg') || a.canPlayType('audio/ogg')))) {
+        var holders = document.querySelectorAll('.tbplayer');
 
-    Array.prototype.forEach.call(holders, function (holder, i) {
-        var holder = holders[i];
-        var location = holder.getAttribute('data-location').split(':');
+        Array.prototype.forEach.call(holders, function (holder, i) {
+            var holder = holders[i];
+            var location = holder.getAttribute('data-location').split(':');
 
-        if (!(location instanceof Array) || !location[1] || !location[2]) {
-            return failGracefully(holder, 'The audio player is not configured.');
-        }
+            if (!(location instanceof Array) || !location[1] || !location[2]) {
+                return failGracefully(holder, 'The audio player is not configured.');
+            }
 
-        reqwest({
-            url: config.requestTarget + '/languages/' + location[0] + '/books/' + location[1] + '.json',
-            crossOrigin: true
-        })
-            .then(function (data) {
-                if (data.status && data.status === 'fail') {
-                    return failGracefully(holder, 'The requested language could not be found.');
-                }
+            reqwest({
+                url: config.requestTarget + '/languages/' + location[0] + '/books/' + location[1] + '.json',
+                crossOrigin: true
+            })
+                .then(function (data) {
+                    if (data.status && data.status === 'fail') {
+                        return failGracefully(holder, 'The requested language could not be found.');
+                    }
 
-                createPlayer(holder, location, data);
-            }, function (error, msg) {
-                return failGracefully(holder, 'The language server responded with an error.');
-            });
-    });
+                    createPlayer(holder, location, data);
+                }, function (error, msg) {
+                    return failGracefully(holder, 'The language server responded with an error.');
+                });
+        });
+    } else {
+        return;
+    }
 };
 
 module.exports = player;
