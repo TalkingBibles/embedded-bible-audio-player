@@ -4,7 +4,7 @@ var crel = require('crel');
 
 // Set configuration variables
 var config = {
-    requestTarget: 'http://api.talkingbibles.org/v1'
+    requestTarget: 'https://s3.amazonaws.com/api.talkingbibles.org/v1'
 };
 
 var addClass = function (el, klass) {
