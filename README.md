@@ -1,4 +1,4 @@
-#  <img src="https://avatars3.githubusercontent.com/u/12140183" width="26" height="26"> Talking Bible Embedded Audio Player
+#  <img src="https://avatars3.githubusercontent.com/u/12140183" width="26" height="26"> Embedded Bible Audio Player
 
 [![MIT License](https://img.shields.io/github/license/TalkingBibles/react-readalong-component.svg)](LICENSE)
 [![Dependencies](https://david-dm.org/TalkingBibles/react-readalong-component.svg)](https://david-dm.org/TalkingBibles/react-readalong-component)
