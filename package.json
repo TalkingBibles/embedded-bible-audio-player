@@ -1,5 +1,6 @@
 {
   "name": "tbplayer",
+  "private": true,
   "version": "0.1.0",
   "scripts": {
     "serve": "./node_modules/.bin/beefy src/index.js 8000 --index test/player.html",

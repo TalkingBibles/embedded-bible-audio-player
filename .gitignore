@@ -2,3 +2,4 @@ data
 server.sh
 api
 node_modules
+build
